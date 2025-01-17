@@ -40,6 +40,6 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: bdj-umtx-hen
-        path: bdj-umtx-hen.iso
+        name: bdj-ipv6-hen
+        path: bdj-ipv6-hen.iso
         if-no-files-found: error
