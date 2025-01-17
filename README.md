@@ -31,3 +31,5 @@ bdj-ipv6-hen is licensed under the GPLv3+.
 [insp2]: https://github.com/sleirsgoevy/bd-jb/tree/ps5
 [sleirsgoevy]: https://github.com/sleirsgoevy
 [theflow]: https://github.com/TheOfficialFloW
+[issues]: https://github.com/ps5-payload-dev/bdj-ipv6-hen/issues/new
+
