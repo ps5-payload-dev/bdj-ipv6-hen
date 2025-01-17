@@ -1,4 +1,4 @@
-# bdj-umtx-hen
+# bdj-ipv6-hen
 This is a BD-J Xlet that enables the execution of ELF payloads on PS5
 consoles running firmwares 3.00-4.51. The Xlet uses a
 [privilege escalation vulnerability][h1] discovered by [theflow][theflow],
@@ -18,13 +18,13 @@ TODO
 TODO
 
 ## Reporting Bugs
-If you encounter problems with bdj-umtx-hen, please [file a github issue][issues].
+If you encounter problems with bdj-ipv6-hen, please [file a github issue][issues].
 If you plan on sending pull requests which affect more than a few lines of code,
 please file an issue before you start to work on you changes. This will allow us
 to discuss the solution properly before you commit time and effort.
 
 ## License
-bdj-umtx-hen is licensed under the GPLv3+.
+bdj-ipv6-hen is licensed under the GPLv3+.
 
 [h1]: https://hackerone.com/reports/1379975
 [insp1]: https://github.com/sleirsgoevy/bd-jb
