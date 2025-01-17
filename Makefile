@@ -15,7 +15,7 @@
 # <http://www.gnu.org/licenses/>.
 
 
-DISC_LABEL := bdj-umtx-hen
+DISC_LABEL := bdj-ipv6-hen
 
 ifndef BDJSDK_HOME
     $(error BDJSDK_HOME is undefined)
