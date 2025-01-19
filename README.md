@@ -12,10 +12,11 @@ connected to the internet, these payloads can be downloaded directly from
 the web so you don't have to burn a new disc when payloads are updated.
 
 ## Quick-start
-TODO
+Download the [ISO][iso] and burn it to a bluray disk. Next, insert the disk into
+your PS5 and navigate to Media to launch it.
 
 ## Building
-TODO
+See the [gihub CI action workflow][workflow].
 
 ## Reporting Bugs
 If you encounter problems with bdj-ipv6-hen, please [file a github issue][issues].
@@ -32,4 +33,5 @@ bdj-ipv6-hen is licensed under the GPLv3+.
 [sleirsgoevy]: https://github.com/sleirsgoevy
 [theflow]: https://github.com/TheOfficialFloW
 [issues]: https://github.com/ps5-payload-dev/bdj-ipv6-hen/issues/new
-
+[workflow]: https://github.com/ps5-payload-dev/bdj-ipv6-hen/blob/master/.github/workflows/ci.yml
+[iso]: https://github.com/ps5-payload-dev/bdj-ipv6-hen/releases/latest/download/bdj-ipv6-hen.iso
