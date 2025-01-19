@@ -9,10 +9,10 @@ security manager using a technique discovered by [sleirsgoevy][insp2].
 The Xlet needs to be burned to a blueray disc, and includes a number
 of useful payloads, e.g., an FTP server and a Telnet server. If your PS5 is
 connected to the internet, these payloads are downloaded directly from
-the web so you don't have to burn a new disc when payloads are updated.
+the web so you don't have to burn a new disc when they are updated.
 
 ## Quick-start
-Download the [ISO][iso] and burn it to a bluray disk. Next, insert the disk into
+Download the [ISO][iso] and burn it to a bluray disc. Next, insert the disc into
 your PS5 and navigate to Media to launch it.
 
 ## Building
