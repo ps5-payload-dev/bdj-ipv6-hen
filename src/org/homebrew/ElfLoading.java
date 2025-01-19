@@ -99,35 +99,18 @@ public class ElfLoading {
 	}
     }
 
-    public static void spawnServer(int port) throws Exception {
-	new LoadingServer(port) {
-	    public void runPayload(byte[] bytes, OutputStream os)
-		throws Exception {
-		ElfLoading.runElf(bytes, os);
-	    }
-	}.spawn();
-    }
-
-    public static void runElf(String elfPath) throws Exception {
+    public static void runElf(byte[] bytes) throws Exception {
 	FileOutputStream os = new FileOutputStream("/dev/null");
 	try {
-	    byte[] bytes = Files.readAllBytes(Paths.get(elfPath));
 	    runElf(bytes, os);
 	} finally {
 	    os.close();
 	}
     }
 
-    public static void runElf(String host, int port, InputStream is) throws Exception {
-	ByteArrayOutputStream os = new ByteArrayOutputStream();
+    public static void runElf(String host, int port, byte[] bytes) throws Exception {
 	Socket sock = new Socket(host, port);
-	byte[] buf = new byte[4096];
-	int len;
-
-	while((len=is.read(buf)) != -1) {
-	    sock.getOutputStream().write(buf, 0, len);
-	}
-
+	sock.getOutputStream().write(bytes);
 	sock.close();
     }
 

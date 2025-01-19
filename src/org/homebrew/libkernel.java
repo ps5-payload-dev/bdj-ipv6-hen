@@ -118,10 +118,6 @@ public class libkernel {
 	}
     }
 
-    public static int ptrace(int request, int pid, long addr, int data) {
-	return (int)lib.invoke("ptrace", request, pid, addr, data);
-    }
-
     public static long mmap(long addr, long length, int prot, int flags,
 			   int fd, long offset) {
 	return lib.invoke("mmap", addr, length, prot, flags, fd, offset);
