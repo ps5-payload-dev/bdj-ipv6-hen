@@ -8,7 +8,7 @@ security manager using a technique discovered by [sleirsgoevy][insp2].
 
 The Xlet needs to be burned to a blueray disc, and includes a number
 of useful payloads, e.g., an FTP server and a Telnet server. If your PS5 is
-connected to the internet, these payloads can be downloaded directly from
+connected to the internet, these payloads are downloaded directly from
 the web so you don't have to burn a new disc when payloads are updated.
 
 ## Quick-start
