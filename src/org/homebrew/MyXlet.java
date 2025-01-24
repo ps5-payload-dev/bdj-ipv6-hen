@@ -101,7 +101,7 @@ public class MyXlet implements UserEventListener, Xlet {
 	byte[] gdbsrv = fetchPayload("/disc/gdbsrv.elf");
 
 	addPayload("klogsrv.elf - A kernel logging server running on port 3232", klogsrv);
-	addPayload("ftpsrv.elf  - An FTP server running on prt 2121", ftpsrv);
+	addPayload("ftpsrv.elf  - An FTP server running on port 2121", ftpsrv);
 	addPayload("websrv.elf  - A web server running on port 8080", websrv);
 	addPayload("shsrv.elf   - A Telnet server running on port 2323", shsrv);
 	addPayload("gdbsrv.elf  - A GDB server running on port 2159", gdbsrv);
@@ -115,7 +115,7 @@ public class MyXlet implements UserEventListener, Xlet {
 	byte[] gdbsrv = fetchPayload(GDBSRV_URL);
 
 	addPayload("klogsrv.elf - A kernel logging server running on port 3232", klogsrv);
-	addPayload("ftpsrv.elf  - An FTP server running on prt 2121", ftpsrv);
+	addPayload("ftpsrv.elf  - An FTP server running on port 2121", ftpsrv);
 	addPayload("websrv.elf  - A web server running on port 8080", websrv);
 	addPayload("shsrv.elf   - A Telnet server running on port 2323", shsrv);
 	addPayload("gdbsrv.elf  - A GDB server running on port 2159", gdbsrv);
