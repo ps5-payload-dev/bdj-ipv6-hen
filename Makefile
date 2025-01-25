@@ -46,6 +46,7 @@ KLOGSRV_URL := https://github.com/ps5-payload-dev/klogsrv/releases/latest/downlo
 FTPSRV_URL  := https://github.com/ps5-payload-dev/ftpsrv/releases/latest/download/Payload.zip
 WEBSRV_URL  := https://github.com/ps5-payload-dev/websrv/releases/latest/download/Payload.zip
 SHSRV_URL   := https://github.com/ps5-payload-dev/shsrv/releases/latest/download/Payload.zip
+KSTUFF_URL  := https://github.com/ps5-payload-dev/kstuff/releases/latest/download/Payload.zip
 GDBSRV_URL  := https://github.com/ps5-payload-dev/gdbsrv/releases/latest/download/Payload.zip
 
 #
@@ -59,7 +60,7 @@ DISC_DIRS  := $(patsubst $(BDJSDK_HOME)/resources/AVCHD%,discdir%,$(TMPL_DIRS)) 
 DISC_FILES := $(patsubst $(BDJSDK_HOME)/resources/AVCHD%,discdir%,$(TMPL_FILES)) \
               discdir/BDMV/JAR/00000.jar discdir/elfldr.elf discdir/klogsrv.elf \
 	      discdir/ftpsrv.elf discdir/websrv.elf discdir/shsrv.elf \
-	      discdir/gdbsrv.elf
+	      discdir/kstuff.elf discdir/gdbsrv.elf
 
 all: $(DISC_LABEL).iso
 
@@ -80,6 +81,9 @@ discdir/websrv.elf:
 
 discdir/shsrv.elf:
 	wget -qO- $(SHSRV_URL) | gunzip -c - > $@
+
+discdir/kstuff.elf:
+	wget -qO- $(KSTUFF_URL) | gunzip -c - > $@
 
 discdir/gdbsrv.elf:
 	wget -qO- $(GDBSRV_URL) | gunzip -c - > $@

@@ -33,6 +33,7 @@ public class MyXlet implements UserEventListener, Xlet {
     private static String WEBSRV_URL  = "https://github.com/ps5-payload-dev/websrv/releases/latest/download/Payload.zip";
     private static String SHSRV_URL   = "https://github.com/ps5-payload-dev/shsrv/releases/latest/download/Payload.zip";
     private static String GDBSRV_URL  = "https://github.com/ps5-payload-dev/gdbsrv/releases/latest/download/Payload.zip";
+    private static String ḰSTUFF_URL  = "https://github.com/ps5-payload-dev/kstuff/releases/latest/download/Payload.zip";
 
     private HScene scene;
     private LoggingUI logUI;
@@ -98,12 +99,14 @@ public class MyXlet implements UserEventListener, Xlet {
 	byte[] ftpsrv = fetchPayload("/disc/ftpsrv.elf");
 	byte[] websrv = fetchPayload("/disc/websrv.elf");
 	byte[] shsrv = fetchPayload("/disc/shsrv.elf");
+	byte[] kstuff = fetchPayload("/disc/kstuff.elf");
 	byte[] gdbsrv = fetchPayload("/disc/gdbsrv.elf");
 
 	addPayload("klogsrv.elf - A kernel logging server running on port 3232", klogsrv);
 	addPayload("ftpsrv.elf  - An FTP server running on port 2121", ftpsrv);
 	addPayload("websrv.elf  - A web server running on port 8080", websrv);
 	addPayload("shsrv.elf   - A Telnet server running on port 2323", shsrv);
+	addPayload("kstuff.elf  - A fake package enabler", kstuff);
 	addPayload("gdbsrv.elf  - A GDB server running on port 2159", gdbsrv);
     }
 
@@ -112,15 +115,16 @@ public class MyXlet implements UserEventListener, Xlet {
 	byte[] ftpsrv = fetchPayload(FTPSRV_URL);
 	byte[] websrv = fetchPayload(WEBSRV_URL);
 	byte[] shsrv = fetchPayload(SHSRV_URL);
+	byte[] kstuff = fetchPayload(ḰSTUFF_URL);
 	byte[] gdbsrv = fetchPayload(GDBSRV_URL);
 
 	addPayload("klogsrv.elf - A kernel logging server running on port 3232", klogsrv);
 	addPayload("ftpsrv.elf  - An FTP server running on port 2121", ftpsrv);
 	addPayload("websrv.elf  - A web server running on port 8080", websrv);
 	addPayload("shsrv.elf   - A Telnet server running on port 2323", shsrv);
+	addPayload("kstuff.elf  - A fake package enabler", kstuff);
 	addPayload("gdbsrv.elf  - A GDB server running on port 2159", gdbsrv);
     }
-
     
     public void initXlet(XletContext context) {
 	logUI = LoggingUI.getInstance();
@@ -206,6 +210,7 @@ public class MyXlet implements UserEventListener, Xlet {
 		LoggingUI.getInstance().log("[-] " + t2.getMessage());
 	    }
 	}
+
     }
 
     public void pauseXlet() {
