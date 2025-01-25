@@ -185,7 +185,6 @@ public class MyXlet implements UserEventListener, Xlet {
 		}
 	    }
 
-	    logUI.setVisible(false);
 	    EventManager.getInstance().addUserEventListener(this, evtRepo);
 	} catch (Throwable t) {
 	    LoggingUI.getInstance().log(t);
@@ -195,6 +194,7 @@ public class MyXlet implements UserEventListener, Xlet {
 	    LoggingUI.getInstance().log("[*] Downloading payloads from https://github.com/ps5-payload-dev");
 	    addGithubPayloads();
 	    LoggingUI.getInstance().log("[+] Payloads downloaded sucessfully");
+	    logUI.setVisible(false);
 	    return;
 	} catch (Throwable t1) {
 	    LoggingUI.getInstance().log("[-] " + t1.getMessage());
