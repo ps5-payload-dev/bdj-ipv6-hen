@@ -17,31 +17,30 @@ public class ListUI extends Container {
     private final int VISIBLE_ITEMS = 26;
 
     private int topItem = 0;
-    private int selectedItem = 0;
+    private int selectedItem = -1;
     private int bottomItem = VISIBLE_ITEMS;
+    private int activeItem = -1;
 
-    void addItem(String label, Object item) {
+    void addItem(String label, Runnable item) {
 	items.add(item);
 	labels.add(label);
 
 	if(bottomItem - topItem < VISIBLE_ITEMS) {
 	    bottomItem += 1;
 	}
-	repaint();
-    }
 
-    void addItem(String label) {
-	items.add(null);
-	labels.add(label);
-
-	if(bottomItem - topItem < VISIBLE_ITEMS) {
-	    bottomItem += 1;
+	if(selectedItem == -1 && item != null) {
+	    selectedItem = items.size() - 1;
 	}
 	repaint();
     }
 
-    Object getSelected() {
-	return items.get(selectedItem);
+    void addItem(String label) {
+	addItem(label, null);
+    }
+
+    Runnable getSelected() {
+	return (Runnable)items.get(selectedItem);
     }
 
     void setSelected(int index) {
@@ -51,36 +50,70 @@ public class ListUI extends Container {
     }
 
     void itemUp() {
-	if(selectedItem > 0) {
-	    selectedItem -= 1;
+	int moves = 0;
+	for(int i=selectedItem-1; i>0; i--) {
+	    moves += 1;
+	    if(items.get(i) != null) {
+		break;
+	    }
 	}
 
+	if(moves == 0) {
+	    return;
+	}
+
+	selectedItem -= moves;
 	if(selectedItem < topItem) {
-	    topItem -= 1;
-	    bottomItem -= 1;
-	}
-
-	if(getSelected() == null && selectedItem > 0) {
-	    itemUp();
+	    topItem -= moves;
+	    bottomItem -= moves;
 	}
 
 	repaint();
     }
 
     void itemDown() {
-	if(selectedItem < items.size() - 1) {
-	    selectedItem++;
-	}
-	if(selectedItem > bottomItem) {
-	    topItem += 1;
-	    bottomItem += 1;
+	int moves = 0;
+
+	for(int i=selectedItem+1; i<items.size(); i++) {
+	    moves += 1;
+	    if(items.get(i) != null) {
+		break;
+	    }
 	}
 
-	if(getSelected() == null && selectedItem < items.size() - 1) {
-	    itemDown();
+	if(moves == 0) {
+	    return;
+	}
+
+	selectedItem += moves;
+	if(selectedItem > bottomItem) {
+	    topItem += moves;
+	    bottomItem += moves;
 	}
 
 	repaint();
+    }
+
+    void itemActivate() {
+	Runnable r =  (Runnable)items.get(selectedItem);
+	if (r == null) {
+	    return;
+	}
+        Thread trd = new Thread(r);
+
+	activeItem = items.indexOf(r);
+        trd.start();
+
+        try {
+            while (trd.isAlive()) {
+                repaint();
+            }
+
+            trd.join();
+        } catch (Throwable t) {
+        }
+
+	activeItem = -1;
     }
 
     public void paint(Graphics g) {
@@ -91,16 +124,38 @@ public class ListUI extends Container {
 
 	for(int i=topItem; i<=bottomItem && i<items.size(); i++) {
 	    String label = (String)labels.get(i);
+	    String prefix = "";
+
 	    if(items.get(i) == null) {
 		g.setColor(disabledColor);
 	    } else if(i == selectedItem) {
 		g.setColor(selectedColor);
-		label = "-> " + label;
 	    } else {
 		g.setColor(fontColor);
-		label = "   " + label;
 	    }
-	    g.drawString(label, 30, 40 + ((i-topItem)*25));
+
+	    if(i == activeItem) {
+		long ms = System.currentTimeMillis();
+		switch((int)(ms/100) % 4) {
+		case 0:
+		    prefix = "/  ";
+		    break;
+		case 1:
+		    prefix = "-  ";
+		    break;
+		case 2:
+		    prefix = "\\  ";
+		    break;
+		case 3:
+		    prefix = "|  ";
+		    break;
+		}
+	    } else if(i == selectedItem) {
+		prefix = "-> ";
+	    }  else if(items.get(i) != null) {
+		prefix = "   ";
+	    }
+	    g.drawString(prefix+label, 30, 40 + ((i-topItem)*25));
 	}
     }
 }

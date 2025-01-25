@@ -79,11 +79,12 @@ public class MyXlet implements UserEventListener, Xlet {
 	throw new Exception("Unknown URI " + uri);
     }
 
-     private void addPayload(String title, byte[] bytes) {
+     private void addPayload(String title, String uri) {
 	listUI.addItem(title,
 		       new Runnable() {
 			   public void run() {
 			       try {
+				   byte[] bytes = fetchPayload(uri);
 				   ElfLoading.runElf("localhost", 9021, bytes);
 			       } catch (Throwable t) {
 				   libkernel.sendNotificationRequest(t.getMessage());
@@ -94,38 +95,7 @@ public class MyXlet implements UserEventListener, Xlet {
 		       });
      }
 
-    private void addDiscPayloads() throws Exception {
-	byte[] klogsrv = fetchPayload("/disc/klogsrv.elf");
-	byte[] ftpsrv = fetchPayload("/disc/ftpsrv.elf");
-	byte[] websrv = fetchPayload("/disc/websrv.elf");
-	byte[] shsrv = fetchPayload("/disc/shsrv.elf");
-	byte[] kstuff = fetchPayload("/disc/kstuff.elf");
-	byte[] gdbsrv = fetchPayload("/disc/gdbsrv.elf");
 
-	addPayload("klogsrv.elf - A kernel logging server running on port 3232", klogsrv);
-	addPayload("ftpsrv.elf  - An FTP server running on port 2121", ftpsrv);
-	addPayload("websrv.elf  - A web server running on port 8080", websrv);
-	addPayload("shsrv.elf   - A Telnet server running on port 2323", shsrv);
-	addPayload("kstuff.elf  - A fake package enabler", kstuff);
-	addPayload("gdbsrv.elf  - A GDB server running on port 2159", gdbsrv);
-    }
-
-    private void addGithubPayloads() throws Exception {
-	byte[] klogsrv = fetchPayload(KLOGSRV_URL);
-	byte[] ftpsrv = fetchPayload(FTPSRV_URL);
-	byte[] websrv = fetchPayload(WEBSRV_URL);
-	byte[] shsrv = fetchPayload(SHSRV_URL);
-	byte[] kstuff = fetchPayload(ḰSTUFF_URL);
-	byte[] gdbsrv = fetchPayload(GDBSRV_URL);
-
-	addPayload("klogsrv.elf - A kernel logging server running on port 3232", klogsrv);
-	addPayload("ftpsrv.elf  - An FTP server running on port 2121", ftpsrv);
-	addPayload("websrv.elf  - A web server running on port 8080", websrv);
-	addPayload("shsrv.elf   - A Telnet server running on port 2323", shsrv);
-	addPayload("kstuff.elf  - A fake package enabler", kstuff);
-	addPayload("gdbsrv.elf  - A GDB server running on port 2159", gdbsrv);
-    }
-    
     public void initXlet(XletContext context) {
 	logUI = LoggingUI.getInstance();
 	logUI.setSize(1280, 720);
@@ -183,8 +153,11 @@ public class MyXlet implements UserEventListener, Xlet {
 		LoggingUI.getInstance().log("[+] Debug/dev mode enabled");
 
 		try {
+		    LoggingUI.getInstance().log("[*] Loading " + ELFLDR_URL);
 		    ElfLoading.runElf(fetchPayload(ELFLDR_URL));
 		} catch (Exception ex) {
+		    LoggingUI.getInstance().log(ex);
+		    LoggingUI.getInstance().log("[*] Loading /disc/elfldr.elf");
 		    ElfLoading.runElf(fetchPayload("/disc/elfldr.elf"));
 		}
 	    }
@@ -194,23 +167,23 @@ public class MyXlet implements UserEventListener, Xlet {
 	    LoggingUI.getInstance().log(t);
 	}
 
-	try {
-	    LoggingUI.getInstance().log("[*] Downloading payloads from https://github.com/ps5-payload-dev");
-	    addGithubPayloads();
-	    LoggingUI.getInstance().log("[+] Payloads downloaded sucessfully");
-	    logUI.setVisible(false);
-	    return;
-	} catch (Throwable t1) {
-	    LoggingUI.getInstance().log("[-] " + t1.getMessage());
-	    try {
-		LoggingUI.getInstance().log("[*] Reading payloads from disc");
-		addDiscPayloads();
-		LoggingUI.getInstance().log("[+] Payloads loaded successfully");
-	    } catch (Throwable t2) {
-		LoggingUI.getInstance().log("[-] " + t2.getMessage());
-	    }
-	}
+	listUI.addItem("Payloads from https://github.com/ps5-payload-dev");
+	addPayload("klogsrv.elf - A kernel logging server running on port 3232", KLOGSRV_URL);
+	addPayload("ftpsrv.elf  - An FTP server running on port 2121", FTPSRV_URL);
+	addPayload("websrv.elf  - A web server running on port 8080", WEBSRV_URL);
+	addPayload("shsrv.elf   - A Telnet server running on port 2323", SHSRV_URL);
+	addPayload("kstuff.elf  - A fake package enabler", ḰSTUFF_URL);
+	addPayload("gdbsrv.elf  - A GDB server running on port 2159", GDBSRV_URL);
 
+	listUI.addItem("Payloads from disc");
+	addPayload("klogsrv.elf - A kernel logging server running on port 3232", "/disc/klogsrv.elf");
+	addPayload("ftpsrv.elf  - An FTP server running on port 2121", "/disc/ftpsrv.elf");
+	addPayload("websrv.elf  - A web server running on port 8080", "/disc/websrv.elf");
+	addPayload("shsrv.elf   - A Telnet server running on port 2323", "/disc/shsrv.elf");
+	addPayload("kstuff.elf  - A fake package enabler", "/disc/kstuff.elf");
+	addPayload("gdbsrv.elf  - A GDB server running on port 2159", "/disc/gdbsrv.elf");
+
+	logUI.setVisible(false);
     }
 
     public void pauseXlet() {
@@ -233,10 +206,7 @@ public class MyXlet implements UserEventListener, Xlet {
 
 	switch(evt.getCode()) {
 	case HRcEvent.VK_ENTER:
-	    Runnable r = (Runnable)listUI.getSelected();
-	    if(r != null) {
-		r.run();
-	    }
+	    listUI.itemActivate();
 	    break;
 	case HRcEvent.VK_UP:
 	    listUI.itemUp();
