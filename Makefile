@@ -97,7 +97,7 @@ discdir/%: discdir
 	cp $(BDJSDK_HOME)/resources/AVCHD/$* $@
 
 $(DISC_LABEL).iso: $(DISC_FILES)
-	$(MAKEFS) -m 16m -t udf -o T=bdre,v=2.50,L=$(DISC_LABEL) $@ discdir
+	$(MAKEFS) -m 32m -t udf -o T=bdre,v=2.50,L=$(DISC_LABEL) $@ discdir
 
 clean:
 	rm -rf META-INF $(DISC_LABEL).iso discdir src/org/homebrew/*.class
