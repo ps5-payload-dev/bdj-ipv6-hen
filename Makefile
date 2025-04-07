@@ -46,8 +46,9 @@ KLOGSRV_URL := https://github.com/ps5-payload-dev/klogsrv/releases/latest/downlo
 FTPSRV_URL  := https://github.com/ps5-payload-dev/ftpsrv/releases/latest/download/Payload.zip
 WEBSRV_URL  := https://github.com/ps5-payload-dev/websrv/releases/latest/download/Payload.zip
 SHSRV_URL   := https://github.com/ps5-payload-dev/shsrv/releases/latest/download/Payload.zip
-KSTUFF_URL  := https://github.com/ps5-payload-dev/kstuff/releases/latest/download/Payload.zip
 GDBSRV_URL  := https://github.com/ps5-payload-dev/gdbsrv/releases/latest/download/Payload.zip
+
+KSTUFF_URL  := https://github.com/EchoStretch/kstuff/releases/latest/download/kstuff.elf
 
 #
 # Disc files
@@ -82,11 +83,11 @@ discdir/websrv.elf:
 discdir/shsrv.elf:
 	wget -qO- $(SHSRV_URL) | gunzip -c - > $@
 
-discdir/kstuff.elf:
-	wget -qO- $(KSTUFF_URL) | gunzip -c - > $@
-
 discdir/gdbsrv.elf:
 	wget -qO- $(GDBSRV_URL) | gunzip -c - > $@
+
+discdir/kstuff.elf:
+	wget -qO- $(KSTUFF_URL) > $@
 
 discdir/BDMV/JAR/00000.jar: discdir $(SOURCES)
 	$(JAVAC) $(JFLAGS) -cp $(CLASSPATH) $(SOURCES)

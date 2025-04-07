@@ -33,7 +33,8 @@ public class MyXlet implements UserEventListener, Xlet {
     private static String WEBSRV_URL  = "https://github.com/ps5-payload-dev/websrv/releases/latest/download/Payload.zip";
     private static String SHSRV_URL   = "https://github.com/ps5-payload-dev/shsrv/releases/latest/download/Payload.zip";
     private static String GDBSRV_URL  = "https://github.com/ps5-payload-dev/gdbsrv/releases/latest/download/Payload.zip";
-    private static String ḰSTUFF_URL  = "https://github.com/ps5-payload-dev/kstuff/releases/latest/download/Payload.zip";
+
+    private static String ḰSTUFF_URL  = "https://github.com/EchoStretch/kstuff/releases/latest/download/kstuff.elf";
 
     private HScene scene;
     private LoggingUI logUI;
@@ -71,10 +72,14 @@ public class MyXlet implements UserEventListener, Xlet {
 	    ctx.init(null, null, null);
 	    conn.setSSLSocketFactory(ctx.getSocketFactory());
 
-	    ZipInputStream is = new ZipInputStream(conn.getInputStream());
-	    ZipEntry entry = is.getNextEntry();
-
-	    return readBytes(is);
+	    if(uri.endsWith(".zip")) {
+		ZipInputStream is = new ZipInputStream(conn.getInputStream());
+		ZipEntry entry = is.getNextEntry();
+		return readBytes(is);
+	    } else {
+		// assume its an ELF file
+		return readBytes(conn.getInputStream());
+	    }
 	}
 	throw new Exception("Unknown URI " + uri);
     }
@@ -172,9 +177,13 @@ public class MyXlet implements UserEventListener, Xlet {
 	addPayload("ftpsrv.elf  - An FTP server running on port 2121", FTPSRV_URL);
 	addPayload("websrv.elf  - A web server running on port 8080", WEBSRV_URL);
 	addPayload("shsrv.elf   - A Telnet server running on port 2323", SHSRV_URL);
-	addPayload("kstuff.elf  - A fake package enabler", ḰSTUFF_URL);
 	addPayload("gdbsrv.elf  - A GDB server running on port 2159", GDBSRV_URL);
 
+	listUI.addItem("");
+    	listUI.addItem("Payloads from https://github.com/EchoStretch");
+	addPayload("kstuff.elf - A fake package enabler", ḰSTUFF_URL);
+
+	listUI.addItem("");
 	listUI.addItem("Payloads from disc");
 	addPayload("klogsrv.elf - A kernel logging server running on port 3232", "/disc/klogsrv.elf");
 	addPayload("ftpsrv.elf  - An FTP server running on port 2121", "/disc/ftpsrv.elf");
