@@ -38,7 +38,7 @@ jobs:
       run: make BDJSDK_HOME=bdj-sdk
 
     - name: Upload
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: bdj-ipv6-hen
         path: bdj-ipv6-hen.iso
