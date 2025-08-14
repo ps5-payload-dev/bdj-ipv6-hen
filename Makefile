@@ -41,13 +41,12 @@ CLASSPATH := $(BDJSDK_HOME)/target/lib/enhanced-stubs.zip:$(BDJSDK_HOME)/target/
 SOURCES   := $(wildcard src/org/homebrew/*.java)
 JFLAGS    := -Xlint:-options
 
-ELFLDR_URL  := https://github.com/ps5-payload-dev/elfldr/releases/latest/download/Payload.zip
-KLOGSRV_URL := https://github.com/ps5-payload-dev/klogsrv/releases/latest/download/Payload.zip
-FTPSRV_URL  := https://github.com/ps5-payload-dev/ftpsrv/releases/latest/download/Payload.zip
-WEBSRV_URL  := https://github.com/ps5-payload-dev/websrv/releases/latest/download/Payload.zip
-SHSRV_URL   := https://github.com/ps5-payload-dev/shsrv/releases/latest/download/Payload.zip
-GDBSRV_URL  := https://github.com/ps5-payload-dev/gdbsrv/releases/latest/download/Payload.zip
-
+ELFLDR_URL  := https://github.com/ps5-payload-dev/elfldr/releases/latest/download/elfldr-ps5.elf
+KLOGSRV_URL := https://github.com/ps5-payload-dev/klogsrv/releases/latest/download/klogsrv-ps5.elf
+FTPSRV_URL  := https://github.com/ps5-payload-dev/ftpsrv/releases/latest/download/ftpsrv-ps5.elf
+WEBSRV_URL  := https://github.com/ps5-payload-dev/websrv/releases/latest/download/websrv-ps5.elf
+SHSRV_URL   := https://github.com/ps5-payload-dev/shsrv/releases/latest/download/shsrv-ps5.elf
+GDBSRV_URL  := https://github.com/ps5-payload-dev/gdbsrv/releases/latest/download/gdbsrv-ps5.elf
 KSTUFF_URL  := https://github.com/EchoStretch/kstuff/releases/latest/download/kstuff.elf
 
 #
@@ -69,22 +68,22 @@ discdir:
 	mkdir -p $(DISC_DIRS)
 
 discdir/elfldr.elf:
-	wget -qO- $(ELFLDR_URL) | gunzip -c - > $@
+	wget -qO- $(ELFLDR_URL) > $@
 
 discdir/klogsrv.elf:
-	wget -qO- $(KLOGSRV_URL) | gunzip -c - > $@
+	wget -qO- $(KLOGSRV_URL) > $@
 
 discdir/ftpsrv.elf:
-	wget -qO- $(FTPSRV_URL) | gunzip -c - > $@
+	wget -qO- $(FTPSRV_URL) > $@
 
 discdir/websrv.elf:
-	wget -qO- $(WEBSRV_URL) | gunzip -c - > $@
+	wget -qO- $(WEBSRV_URL) > $@
 
 discdir/shsrv.elf:
-	wget -qO- $(SHSRV_URL) | gunzip -c - > $@
+	wget -qO- $(SHSRV_URL) > $@
 
 discdir/gdbsrv.elf:
-	wget -qO- $(GDBSRV_URL) | gunzip -c - > $@
+	wget -qO- $(GDBSRV_URL) > $@
 
 discdir/kstuff.elf:
 	wget -qO- $(KSTUFF_URL) > $@

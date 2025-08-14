@@ -27,13 +27,12 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 
 public class MyXlet implements UserEventListener, Xlet {
-    private static String ELFLDR_URL  = "https://github.com/ps5-payload-dev/elfldr/releases/latest/download/Payload.zip";
-    private static String KLOGSRV_URL = "https://github.com/ps5-payload-dev/klogsrv/releases/latest/download/Payload.zip";
-    private static String FTPSRV_URL  = "https://github.com/ps5-payload-dev/ftpsrv/releases/latest/download/Payload.zip";
-    private static String WEBSRV_URL  = "https://github.com/ps5-payload-dev/websrv/releases/latest/download/Payload.zip";
-    private static String SHSRV_URL   = "https://github.com/ps5-payload-dev/shsrv/releases/latest/download/Payload.zip";
-    private static String GDBSRV_URL  = "https://github.com/ps5-payload-dev/gdbsrv/releases/latest/download/Payload.zip";
-
+    private static String ELFLDR_URL  = "https://github.com/ps5-payload-dev/elfldr/releases/latest/download/elfldr-ps5.elf";
+    private static String KLOGSRV_URL = "https://github.com/ps5-payload-dev/klogsrv/releases/latest/download/klogsrv-ps5.elf";
+    private static String FTPSRV_URL  = "https://github.com/ps5-payload-dev/ftpsrv/releases/latest/download/ftpsrv-ps5.elf";
+    private static String WEBSRV_URL  = "https://github.com/ps5-payload-dev/websrv/releases/latest/download/websrv-ps5.elf";
+    private static String SHSRV_URL   = "https://github.com/ps5-payload-dev/shsrv/releases/latest/download/shsrv-ps5.elf";
+    private static String GDBSRV_URL  = "https://github.com/ps5-payload-dev/gdbsrv/releases/latest/download/gdbsrv-ps5.elf";
     private static String ḰSTUFF_URL  = "https://github.com/EchoStretch/kstuff/releases/latest/download/kstuff.elf";
 
     private HScene scene;
